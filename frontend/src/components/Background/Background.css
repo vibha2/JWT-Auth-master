@@ -1,0 +1,15 @@
+.backgroundBody
+{
+    padding-top:4rem;
+    text-align: center;
+    color: lightgrey;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.backgroundBody > p {
+    width:50%;
+}
