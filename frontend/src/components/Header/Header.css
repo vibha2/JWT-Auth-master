@@ -1,0 +1,22 @@
+.profileButton
+{
+    display: flex;
+    gap:1rem;
+    color:rgb(215, 219, 220);
+    font-size: 1.25rem;
+    
+}
+/* .profileBtn,
+.logoutBtn{
+    color:white;
+    transition: color 0.3s;
+}
+
+.profileBtn:hover,
+.logoutBtn:hover{
+    color: pink;
+} */
+.dropdown-item:focus,
+.dropdown-item:hover{
+    color: white !important;
+}

@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -15,6 +16,13 @@ const userRoutes = require('./routes/userRoutes.js');
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
+const corsOptions = {
+  // origin: 'http://localhost:3000',
+  origin: '*',
+  credentials: true,
+};
+app.use(cors(corsOptions));
+
 
 //PORT declaration
 const PORT = process.env.PORT || 4000;

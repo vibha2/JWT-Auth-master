@@ -7,7 +7,6 @@ require("dotenv").config();
 
 exports.registerUser = async (req, res) => {
     try{
-
     const { firstName, lastName, email, password, confirmPassword } = req.body;
 
      //validation
@@ -90,6 +89,72 @@ catch(error){
 
 
 };
+
+exports.loginUser = async(req, res) => {
+    try{
+
+        const { email, password } = req.body;
+
+        // Validation
+        if(!email || !password)
+        {
+            return res.status(403).json({
+                success: false,
+                message: "Please fill required fields"
+            });
+        }
+
+        //check user exists in Db or not
+        const user = await User.findOne({ email });
+        console.log("user in db=> ",user);
+
+        if(!user)
+        {
+            return res.status(402).json({
+                success: false,
+                message: "User not exists, Please Signup first"
+            });
+        }
+
+        if(user && await bcrypt.compare(password, user.password))
+        {
+            const payload = {
+                email: user.email,
+                id: user._id,
+            }
+            generateToken(res, payload);
+
+            console.log("Logged in Successfully");
+
+            return res.status(200).json({
+                success: true,
+                message: "Logged in Successfully",
+                _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email
+            });
+        }
+
+    }
+    catch(error)
+    {
+        console.log("error=> ",error);
+        return res.status(400).json({
+            success: false,
+            message: "Unable to login the user"
+        })
+    }
+}
+
+exports.logoutUser = async(req, res) => {
+    res.cookie('jwt', '', {
+      httpOnly: true,
+      expires: new Date(0),
+    });
+    res.status(200).json({ message: 'Logged out successfully' });
+  };
+  
 
 
 

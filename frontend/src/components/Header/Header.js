@@ -2,9 +2,32 @@ import React from 'react'
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import './Header.css';
+
+import { useLogoutMutation } from '../../slices/usersApiSlice';
+import { logout } from '../../slices/userAuthSlice';
 
 
 const Header = () => {
+
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [ logoutApi ] = useLogoutMutation();
+
+  const logoutHandler = async() => {
+    try{
+      await logoutApi().unwrap();
+      dispatch(logout());
+      navigate('/login');
+    }catch(err){
+      console.error(err);
+    }
+   
+  }
 
   return (
 <header>
@@ -16,18 +39,20 @@ const Header = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
-              {/* {userInfo ? (
+              {userInfo ? (
                 <>
-                  <NavDropdown title={userInfo.name} id='username'>
-                    <LinkContainer to='/profile'>
+                  {/* <NavDropdown title={userInfo.firstName} id='username'> */}
+                    <div className='profileButton'>
+                    <LinkContainer to='/profile' className='profileBtn'>
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
-                    <NavDropdown.Item onClick={logoutHandler}>
+                    <NavDropdown.Item onClick={logoutHandler} className='logoutBtn'>
                       Logout
                     </NavDropdown.Item>
-                  </NavDropdown>
+                    </div>
+                  {/* </NavDropdown> */}
                 </>
-              ) : ( */}
+              ) : (
                 <>
                   <LinkContainer to='/login'>
                     <Nav.Link>
@@ -42,7 +67,7 @@ const Header = () => {
                     </Nav.Link>
                   </LinkContainer>
                 </>
-              {/* )} */}
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

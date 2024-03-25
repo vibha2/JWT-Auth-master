@@ -1,14 +1,61 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { setCredentials } from '../../slices/userAuthSlice';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import './Register.css';
+import { useRegisterMutation } from '../../slices/usersApiSlice';
+
+
 
 function Register() {
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [register] = useRegisterMutation();
+  const { userInfo } = useSelector((state) => state.auth);
+
+//   useEffect(() => {
+//     if (userInfo) {
+//       navigate('/');
+//     }
+//   }, [navigate, userInfo]);
+
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+
+    console.log("useRegisterMutation=> ", useRegisterMutation);
+    if(password !== confirmPassword)
+    {
+        toast.error('Passwords do not match');
+    }else{
+        console.log("before registration");
+        try{
+        const res = await register({ firstName, lastName, email, password, confirmPassword }).unwrap();
+        console.log("response=> ", res);
+        dispatch(setCredentials({ ...res }));
+        toast.success('User registered Successfully');
+        navigate('/');
+        }catch(error){
+            toast.error(error);
+        }
+    }
+
+  }
   return (
     <div className='register-wrapper'>
     <div className='register-cont'>
             <h3 className='register-heading'>Register</h3>
             <form
-            //  onSubmit={handleSubmit}
+             onSubmit={handleSubmit}
               class="">
                 <div class="mb-3">
                     <label class="form-label" for="firstName">First Name</label>
@@ -18,8 +65,8 @@ function Register() {
                         name="firstName" 
                         id="firstName" 
                         class="form-control" 
-                        // value={formData.firstName}
-                        // onChange={handleChange}
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
                     />
                 </div>
 
@@ -31,8 +78,8 @@ function Register() {
                         name="lastName" 
                         id="lastName" 
                         class="form-control"
-                        // value={formData.lastName}
-                        // onChange={handleChange}
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
                      />
                 </div>
 
@@ -44,8 +91,8 @@ function Register() {
                         name="email"
                         id="exampleForm.ControlInput1" 
                         class="form-control" 
-                        // value={formData.email}
-                        // onChange={handleChange}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
 
@@ -57,8 +104,8 @@ function Register() {
                         name="password" 
                         id="password" 
                         class="form-control"
-                        // value={formData.password}
-                        // onChange={handleChange}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                      />
                 </div>
 
@@ -70,8 +117,8 @@ function Register() {
                         name="confirmPassword" 
                         id="confirmpassword" 
                         class="form-control"
-                        // value={formData.confirmPassword}
-                        // onChange={handleChange}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                      />
                 </div>
 
