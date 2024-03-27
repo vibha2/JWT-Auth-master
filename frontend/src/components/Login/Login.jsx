@@ -20,7 +20,7 @@ function Login() {
 
   useEffect(() => {
     if (userInfo) {
-      navigate('/user');
+      navigate('/');
     }
   }, [navigate, userInfo]);
 
@@ -31,7 +31,7 @@ function Login() {
       console.log("res in login.jsx=> ", res);
       dispatch(setCredentials({...res}) );
       console.log("res dispatch check ");
-      navigate('/user');
+      navigate('/');
     }catch(err){
       toast.error(err.error);
     }

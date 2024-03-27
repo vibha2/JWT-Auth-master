@@ -52,11 +52,11 @@ exports.registerUser = async (req, res) => {
 
     if(user)
     {
-        const payload = {
-            email: user.email,
-            id: user._id,
-        }
-        generateToken(res, payload);
+        // const payload = {
+        //     email: user.email,
+        //     id: user._id,
+        // }
+        generateToken(res, user._id);
 
         console.log("user registered successfully");
         return res.status(201).json({
@@ -118,11 +118,12 @@ exports.loginUser = async(req, res) => {
 
         if(user && await bcrypt.compare(password, user.password))
         {
-            const payload = {
-                email: user.email,
-                id: user._id,
-            }
-            generateToken(res, payload);
+            // const payload = {
+            //     email: user.email,
+            //     id: user._id,
+            // }
+            
+            generateToken(res, user._id);
 
             console.log("Logged in Successfully");
 

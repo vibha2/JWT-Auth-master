@@ -2,11 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+// import {
+//   createBrowserRouter,
+//   createRoutesFromElements,
+//   Route,
+//   RouterProvider,
+// } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { store } from '../src/store';
+// import Background from './components/Background/Background';
+// import Register from './components/Register/Register';
+// import Login from './components/Login/Login';
+// import UserProfilePage from './components/UserProfilePage/UserProfilePage';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
