@@ -82,3 +82,41 @@ exports.getUserProfile = async(req, res, next) => {
         })
     }
 }
+
+//isAdmin
+exports.isAdmin = async(req,res, next) => {
+    try{
+        if(req.user.accountType !== "Admin")
+        {
+            return res.status(401).json({
+                success: false,
+                message: "This is protected route for Admin only"
+            })
+        }
+        next();
+    }catch(err){
+        return res.status(500).json({
+            success: false,
+            message: "Admin role is not matching"
+        })
+    }
+}
+
+//isMember
+exports.isMember = async(req,res, next) => {
+    try{
+        if(req.user.accountType !== "Member")
+        {
+            return res.status(401).json({
+                success: false,
+                message: "This is protected route for Member only"
+            })
+        }
+        next();
+    }catch(err){
+        return res.status(500).json({
+            success: false,
+            message: "Member role is not matching"
+        })
+    }
+}

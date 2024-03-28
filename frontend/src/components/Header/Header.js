@@ -39,13 +39,20 @@ const Header = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
+            
               {userInfo ? (
                 <>
                   {/* <NavDropdown title={userInfo.firstName} id='username'> */}
                     <div className='profileButton'>
+                    { userInfo?.accountType === "Admin" && (
+                        <LinkContainer to='/admin' className='profileBtn'>
+                          <NavDropdown.Item>Admin</NavDropdown.Item>
+                        </LinkContainer>
+                    )}
                     <LinkContainer to='/profile' className='profileBtn'>
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
+
                     <NavDropdown.Item onClick={logoutHandler} className='logoutBtn'>
                       Logout
                     </NavDropdown.Item>

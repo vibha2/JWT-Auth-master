@@ -46,6 +46,7 @@ exports.registerUser = async (req, res) => {
         lastName,
         email,
         password: hashedPassword,
+        accountType: "Member",
     });
 
     console.log("signup user=> ",user);
@@ -61,8 +62,9 @@ exports.registerUser = async (req, res) => {
         console.log("user registered successfully");
         return res.status(201).json({
             _id: user._id,
-            name: user.name,
+            firstname: user.firstName,
             email: user.email,
+            accountType: user.accountType,
             success: true,
             message: "User registered Successfully",
         })
@@ -133,7 +135,8 @@ exports.loginUser = async(req, res) => {
                 _id: user._id,
                 firstName: user.firstName,
                 lastName: user.lastName,
-                email: user.email
+                email: user.email,
+                accountType: user.accountType
             });
         }
 

@@ -23,7 +23,11 @@ const userSchema = new mongoose.Schema(
         type: String,
         required: true,
     },
-
+    accountType: {
+        type: String,
+        enum: ["Admin", "Member"],
+        required: true,
+      },
     },
     {
         timestamps: true,

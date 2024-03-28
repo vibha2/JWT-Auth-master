@@ -6,9 +6,10 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import UserHomePage from './components/UserHomePage/UserHomePage';
 import UserProfilePage from './components/UserProfilePage/UserProfilePage';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import AdminPrivateRoute from './components/PrivateRoute/AdminPrivateRoute';
+import AdminPage from './components/AdminPage/AdminPage';
 
 function App() {
   return (
@@ -23,8 +24,10 @@ function App() {
           <Route path='' element={<PrivateRoute />} >
               <Route path='/profile' element={<UserProfilePage />} />
           </Route>
-          {/* <Route path="/user" element={<UserHomePage/>} /> */}
-          {/* <PrivateRoute path="/" element={<UserHomePage />} /> */}
+          <Route path='' element={<AdminPrivateRoute />} >
+              <Route path='/admin' element={<AdminPage />} />
+          </Route>
+
         </Routes>
       </div>
     </div>
