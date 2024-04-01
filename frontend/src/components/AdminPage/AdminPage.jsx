@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './AdminPage.css';
 import ItemService from '../../services/ItemService';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function AdminPage() {
 
+    const navigate = useNavigate();
     const handleItemSubmit = (event) => {
       event.preventDefault();
       console.log("hello to HandleSubmit=> ");
@@ -36,6 +38,13 @@ function AdminPage() {
           imageFile: null,
           itemMode: ''
         });
+
+        
+        setTimeout(() => {
+          console.log('Inside SetTimeOut');
+          navigate('/adminlist');
+        }, 5000); // 3000 milliseconds = 3 seconds
+        
 
         })
         .catch(error =>{

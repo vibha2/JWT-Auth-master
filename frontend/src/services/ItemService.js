@@ -12,6 +12,17 @@ const ItemService = {
         }catch(error){
             console.log("error in itemSubmit api call=> ", error)
         }
+    },
+
+    getAllItem: async function(){
+        try{
+            const response = axios_api.get("/upload/getItemData")
+            console.log("response in service=> ", response);
+            return response? response: null;
+
+        }catch(error){
+            console.log("error in getAllItem api call=> ", error);
+        }
     }
 }
 

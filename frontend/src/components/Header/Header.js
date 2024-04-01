@@ -49,6 +49,12 @@ const Header = () => {
                           <NavDropdown.Item>Admin</NavDropdown.Item>
                         </LinkContainer>
                     )}
+
+                    { userInfo?.accountType === "Member" && (
+                        <LinkContainer to='/memberlist' className='profileBtn'>
+                          <NavDropdown.Item>Item</NavDropdown.Item>
+                        </LinkContainer>
+                    )}
                     <LinkContainer to='/profile' className='profileBtn'>
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
