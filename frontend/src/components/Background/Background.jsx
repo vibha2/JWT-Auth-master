@@ -12,7 +12,7 @@ function Background() {
       { userInfo? (
         <div className='userBackground'>
           <div className='userContainer'>
-            <h2>Welcome to User Home Page</h2>
+            <h2>{`Welcome to ${ userInfo?.accountType} User Home Page`}</h2>
           </div>
         </div>
       )

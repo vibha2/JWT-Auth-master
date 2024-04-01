@@ -1,0 +1,21 @@
+.adminWrapper
+{
+    /* background-color: #55aaef36; */
+    /* background-color: #66b5f51c; */
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:5rem;
+}
+
+.admin-cont{
+    width:40%;
+    /* border: 1px solid white; */
+    border: 1px solid #adb5bd;
+    border-radius: 10px;
+    /* box-shadow: 0 5px 10px rgba(246, 246, 247, 0.741); */
+    background-color: white;
+    color: black;
+    padding: 2rem;
+}

@@ -10,6 +10,7 @@ import UserProfilePage from './components/UserProfilePage/UserProfilePage';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import AdminPrivateRoute from './components/PrivateRoute/AdminPrivateRoute';
 import AdminPage from './components/AdminPage/AdminPage';
+import AdminList from './components/AdminList/AdminList';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path='' element={<AdminPrivateRoute />} >
               <Route path='/admin' element={<AdminPage />} />
           </Route>
+          <Route path="/adminlist" element={<AdminList/>} />
 
         </Routes>
       </div>
