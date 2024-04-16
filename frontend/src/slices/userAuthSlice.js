@@ -18,7 +18,8 @@ const userAuthSlice = createSlice({
             // } 
             // state.userInfo.push(users);
             console.log("action payload => ", action.payload);
-            state.userInfo = action.payload;
+            state.userInfo = action.payload?.user ? action.payload.user: action.payload;
+            console.log("userinfo => ", state.userInfo);
             localStorage.setItem('userInfo', JSON.stringify(action.payload));
         },
 

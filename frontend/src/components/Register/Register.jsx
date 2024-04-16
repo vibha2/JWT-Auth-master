@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import './Register.css';
 import { useRegisterMutation } from '../../slices/usersApiSlice';
 
+import { useSendotpMutation } from '../../slices/usersApiSlice';
+
 
 
 function Register() {
@@ -22,6 +24,8 @@ function Register() {
   const [register] = useRegisterMutation();
   const { userInfo } = useSelector((state) => state.auth);
 
+  const [ sendotp ] = useSendotpMutation();
+
 //   useEffect(() => {
 //     if (userInfo) {
 //       navigate('/');
@@ -35,15 +39,44 @@ function Register() {
     console.log("useRegisterMutation=> ", useRegisterMutation);
     if(password !== confirmPassword)
     {
+        console.log("Password not matching");
         toast.error('Passwords do not match');
     }else{
         console.log("before registration");
+        const signupData = {
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+            accountType: "Member"
+        }
         try{
-        const res = await register({ firstName, lastName, email, password, confirmPassword }).unwrap();
-        console.log("response=> ", res);
-        dispatch(setCredentials({ ...res }));
-        toast.success('User registered Successfully');
-        navigate('/');
+        // const res = await register({ firstName, lastName, email, password, confirmPassword }).unwrap();
+        // console.log("response=> ", res);
+        // dispatch(setCredentials({ ...res }));
+        // toast.success('User registered Successfully');
+        // navigate('/');
+
+        dispatch(setCredentials(signupData));
+        console.log("signupdata=> ", signupData.email);
+        const email = signupData.email;
+        // Send OTP to user for verification
+        const resp = await sendotp({ email });
+        console.log("res=> ", resp);
+        if(resp.data.success){
+            toast.success('OTP sent successfully');
+            navigate('/verify-email');
+            console.log("res=> ", resp.data.otp);
+        }else{
+            console.log("otp=> ", resp);
+            toast.error('OTP failed to send');
+            return
+        }
+        
+
+        // dispatch(sendotp(signupData.email, navigate));
+
         }catch(error){
             toast.error(error);
         }

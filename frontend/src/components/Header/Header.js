@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
@@ -17,6 +17,15 @@ const Header = () => {
   const navigate = useNavigate();
 
   const [ logoutApi ] = useLogoutMutation();
+  // const [ userData, setUserData ] = useState();
+
+  // useEffect(()=> {
+  //   if(userInfo)
+  //   {
+  //     setUserData(userInfo);
+  //     console.log("user=> ", userInfo, userData);
+  //   }
+  // }, []);
 
   const logoutHandler = async() => {
     try{

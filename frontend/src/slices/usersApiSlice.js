@@ -22,6 +22,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             
         }),
 
+        sendotp: builder.mutation({
+            query: (data) => ({
+                url: 'sendotp',
+                method: 'POST',
+                body: data,
+            })
+        }),
+
         logout: builder.mutation({
             query: (data) => ({
                 url: 'logout',
@@ -33,4 +41,4 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 
 })
 
-export const { useRegisterMutation, useLoginMutation, useLogoutMutation } = usersApiSlice;
+export const { useRegisterMutation, useLoginMutation, useSendotpMutation, useLogoutMutation } = usersApiSlice;

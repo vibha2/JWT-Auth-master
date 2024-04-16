@@ -11,6 +11,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import AdminPrivateRoute from './components/PrivateRoute/AdminPrivateRoute';
 import AdminPage from './components/AdminPage/AdminPage';
 import AdminList from './components/AdminList/AdminList';
+import VerifyEmail from './components/VerifyEmail/VerifyEmail';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route path="/" element={<Background/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
+          <Route path='/verify-email' element={<VerifyEmail/>} />
+
           <Route path='' element={<PrivateRoute />} >
               <Route path='/profile' element={<UserProfilePage />} />
           </Route>

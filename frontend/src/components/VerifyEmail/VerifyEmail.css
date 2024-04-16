@@ -1,0 +1,19 @@
+.otp-style
+{
+    width:5rem !important;
+}
+
+.otpFooter
+{
+    display: flex;
+    justify-content: space-between;
+}
+.resendButton{
+    background-color: transparent;
+    color:grey;
+    border: none;
+    cursor: pointer;
+}
+.resendButton:hover{
+    color:black;
+}
