@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation } from '../../slices/usersApiSlice';
 import { toast } from 'react-toastify';
-import { setCredentials } from '../../slices/userAuthSlice';
+import { setCredentials, setToken } from '../../slices/userAuthSlice';
 
 function Login() {
 
@@ -17,6 +17,7 @@ function Login() {
   const [ login, { isLoading } ] = useLoginMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
+ 
 
   useEffect(() => {
     if (userInfo) {
@@ -27,9 +28,14 @@ function Login() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
+      console.log("handleLoginSubmit")
       const res = await login({ email, password }).unwrap();
+      if(!res){
+        console.log("error in login")
+      }
       console.log("res in login.jsx=> ", res);
       dispatch(setCredentials({...res}) );
+      dispatch(setToken(res?.user?.token));
       console.log("res dispatch check ");
       navigate('/');
     }catch(err){

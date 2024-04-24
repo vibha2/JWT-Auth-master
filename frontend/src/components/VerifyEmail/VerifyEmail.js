@@ -41,6 +41,7 @@ function VerifyEmail() {
                 console.log("error in authapi");
                 toast.error(res.data.message)
             }
+            // dispatch setToken here res.user.token
             toast.success('User registered Successfully');
             navigate('/');
         }catch(error){

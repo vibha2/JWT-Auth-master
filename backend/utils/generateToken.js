@@ -6,7 +6,9 @@ exports.generateToken = (res, userId) => {
         expiresIn: "1d"
     });
 
-    console.log("token=> ", token);
+    console.log("token=> in generatetoken", token);
+    
+    
     res.cookie('jwt', token, {
         httpOnly: true,
         // secure: process.env.NODE_ENV !== 'development', // Use secure cookies in production
@@ -14,6 +16,7 @@ exports.generateToken = (res, userId) => {
         maxAge: 1 * 24 * 60 * 60 * 1000, // 1 days
       });
 
+      return token;
 }
 
 

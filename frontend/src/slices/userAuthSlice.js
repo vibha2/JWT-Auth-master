@@ -1,9 +1,12 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     userInfo : localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo'))
     : null,
+
+    userAccountType: localStorage.getItem('userAccountType'),
+    token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null,
 }
 
 const userAuthSlice = createSlice({
@@ -19,10 +22,19 @@ const userAuthSlice = createSlice({
             // state.userInfo.push(users);
             console.log("action payload => ", action.payload);
             state.userInfo = action.payload?.user ? action.payload.user: action.payload;
-            console.log("userinfo => ", state.userInfo);
+            console.log("userinfo => ", state.userInfo, state.userInfo?.accountType);
+
+            state.userAccountType = state.userInfo?.accountType;
+            console.log("userAccountType=> ",state.userAccountType);
+
             localStorage.setItem('userInfo', JSON.stringify(action.payload));
+            localStorage.setItem('userAccountType', JSON.stringify(state.userAccountType));
         },
 
+        setToken(state, value) {
+            state.token = value.payload;
+        },
+       
         logout: (state, action) => {
             state.userInfo = null;
             localStorage.removeItem('userInfo');
@@ -36,7 +48,7 @@ const userAuthSlice = createSlice({
 })
 
 //export reducers functions -> when we using dispatch we can get this individual reducers from the slice
-export const { setCredentials, logout } = userAuthSlice.actions;
+export const { setCredentials,setToken, logout } = userAuthSlice.actions;
 
 //export entire slice, this needs to wired up to the store
 export default userAuthSlice.reducer;

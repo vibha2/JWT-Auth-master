@@ -12,8 +12,10 @@ import AdminPrivateRoute from './components/PrivateRoute/AdminPrivateRoute';
 import AdminPage from './components/AdminPage/AdminPage';
 import AdminList from './components/AdminList/AdminList';
 import VerifyEmail from './components/VerifyEmail/VerifyEmail';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const { userAccountType } = useSelector((state) => state.auth);
   return (
     <div className="App">
       <Header />
@@ -31,8 +33,12 @@ function App() {
           <Route path='' element={<AdminPrivateRoute />} >
               <Route path='/admin' element={<AdminPage />} />
           </Route>
-          <Route path="/adminlist" element={<AdminList/>} />
           <Route path="/memberlist" element={<AdminList/>} />
+          <Route path="/adminlist" element={<AdminList/>} />
+          
+          
+
+         
         </Routes>
       </div>
     </div>

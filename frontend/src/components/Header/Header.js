@@ -5,6 +5,7 @@ import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
+import { Link, matchPath } from 'react-router-dom'
 
 import { useLogoutMutation } from '../../slices/usersApiSlice';
 import { logout } from '../../slices/userAuthSlice';
@@ -12,20 +13,20 @@ import { logout } from '../../slices/userAuthSlice';
 
 const Header = () => {
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { token } = useSelector( (state) => state.auth );
+  const { userInfo, userAccountType } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [ logoutApi ] = useLogoutMutation();
-  // const [ userData, setUserData ] = useState();
 
-  // useEffect(()=> {
-  //   if(userInfo)
-  //   {
-  //     setUserData(userInfo);
-  //     console.log("user=> ", userInfo, userData);
-  //   }
-  // }, []);
+  useEffect(()=> {
+    if(userInfo)
+    {
+      
+      console.log("data=> ", userAccountType?userAccountType:null);
+    }
+  }, []);
 
   const logoutHandler = async() => {
     try{
@@ -48,6 +49,13 @@ const Header = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
+             {/* {
+              userAccountType && (
+                <Link to="/memberlist" className='profileBtn'>
+                          Item
+                </Link>
+              )
+             } */}
             
               {userInfo ? (
                 <>
@@ -59,11 +67,21 @@ const Header = () => {
                         </LinkContainer>
                     )}
 
-                    { userInfo?.accountType === "Member" && (
+                    {
+                      userAccountType && (
+                        <LinkContainer to='/memberlist' className='profileBtn'>
+                          <NavDropdown.Item>
+                              Item
+                          </NavDropdown.Item>
+                        </LinkContainer>
+                      )
+                    }
+
+                    {/* { userAccountType === "Member" && (
                         <LinkContainer to='/memberlist' className='profileBtn'>
                           <NavDropdown.Item>Item</NavDropdown.Item>
                         </LinkContainer>
-                    )}
+                    )} */}
                     <LinkContainer to='/profile' className='profileBtn'>
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>

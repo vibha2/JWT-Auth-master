@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setCredentials } from '../../slices/userAuthSlice';
+import { setCredentials, setToken } from '../../slices/userAuthSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './Register.css';
@@ -59,6 +59,7 @@ function Register() {
         // navigate('/');
 
         dispatch(setCredentials(signupData));
+        
         console.log("signupdata=> ", signupData.email);
         const email = signupData.email;
         // Send OTP to user for verification

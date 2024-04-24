@@ -79,7 +79,11 @@ exports.registerUser = async (req, res) => {
         //     email: user.email,
         //     id: user._id,
         // }
-        generateToken(res, user._id);
+        
+        const token = generateToken(res, user._id);
+
+        console.log("signup token", token);
+        user.token = token;
 
         console.log("user registered successfully");
         return res.status(201).json({
@@ -150,9 +154,10 @@ exports.loginUser = async(req, res) => {
             //     id: user._id,
             // }
             
-            generateToken(res, user._id);
+            const token = generateToken(res, user._id);
 
-            console.log("Logged in Successfully");
+            console.log("Logged in Successfully", token);
+            user.token = token;
 
             return res.status(200).json({
                 success: true,
