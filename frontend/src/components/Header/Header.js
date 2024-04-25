@@ -41,7 +41,7 @@ const Header = () => {
 
   return (
 <header>
-      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar variant='dark' expand='lg' style={{ borderBottom: "1px solid #2C333F", backgroundColor: "#161D29"}} collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>MERN Auth</Navbar.Brand>
@@ -61,11 +61,19 @@ const Header = () => {
                 <>
                   {/* <NavDropdown title={userInfo.firstName} id='username'> */}
                     <div className='profileButton'>
-                    { userInfo?.accountType === "Admin" && (
+                    {/* { userInfo?.accountType === "Admin" && (
                         <LinkContainer to='/admin' className='profileBtn'>
                           <NavDropdown.Item>Admin</NavDropdown.Item>
                         </LinkContainer>
-                    )}
+                    )} */}
+
+                    {
+                      userAccountType === "Admin" && (
+                        <LinkContainer to='/admin' className='profileBtn'>
+                          <NavDropdown.Item>Admin</NavDropdown.Item>
+                        </LinkContainer>
+                      )
+                    }
 
                     {
                       userAccountType && (
@@ -82,7 +90,7 @@ const Header = () => {
                           <NavDropdown.Item>Item</NavDropdown.Item>
                         </LinkContainer>
                     )} */}
-                    <LinkContainer to='/profile' className='profileBtn'>
+                    <LinkContainer to='/dashboard/my-profile' className='profileBtn'>
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
 

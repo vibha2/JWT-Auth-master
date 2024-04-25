@@ -1,0 +1,36 @@
+.dashboardWrapper
+{
+    position: relative;
+    display: flex;
+    min-height: calc(100vh-3.5rem);
+
+}
+
+.dashboardContainer
+{
+    width: 84%;
+    height: 95vh;
+    background-color: #000814;
+    
+}
+
+.dashboardRightContainer
+{
+    margin: auto;
+    width: 91%;
+    max-width: 1000px;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    background-color: #161D29;
+    height: 95vh;
+    width: 16%;
+}
+
+.sidebarLinks{
+  color: #FFD60A;
+}

@@ -5,14 +5,15 @@ import { useSelector } from 'react-redux';
 
 function Background() {
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo, userAccountType } = useSelector((state) => state.auth);
 
   return (
     <>
       { userInfo? (
         <div className='userBackground'>
           <div className='userContainer'>
-            <h2>{`Welcome to ${ userInfo?.accountType} User Home Page`}</h2>
+          
+            <h2>{`Welcome to ${ userAccountType} User Home Page`}</h2>
           </div>
         </div>
       )

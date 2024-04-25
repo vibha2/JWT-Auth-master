@@ -5,7 +5,8 @@ const initialState = {
     ? JSON.parse(localStorage.getItem('userInfo'))
     : null,
 
-    userAccountType: localStorage.getItem('userAccountType'),
+    userAccountType: localStorage.getItem('userAccountType')? JSON.parse(localStorage.getItem('userAccountType'))
+    : "",
     token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null,
 }
 
@@ -38,6 +39,8 @@ const userAuthSlice = createSlice({
         logout: (state, action) => {
             state.userInfo = null;
             localStorage.removeItem('userInfo');
+            localStorage.removeItem('userAccountType');
+            localStorage.removeItem('token');
         },
         //This removeUsers is only for syntax and testing here
         // removeUsers: (state, action) => {
